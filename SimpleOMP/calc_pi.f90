@@ -1,11 +1,13 @@
 program calculate_pi
     implicit none
     
-    integer, parameter :: N = 100000
+    integer, parameter :: N = 1000000
     integer            :: i
     real(8), parameter :: delta_x = 1.0 / N
     real(8)            :: sum, my_pi
+    real               :: time_start, time_end
 
+    call cpu_time(time_start)
     write(*, *) N, delta_x, f(0.5d0)    
     
     sum = 0.0d0
@@ -19,6 +21,9 @@ program calculate_pi
     
     my_pi = 4.0d0 * sum
     write(*, *) "Pi = ", my_pi
+
+    call cpu_time(time_end)
+    write(*, *) "Time taken ", time_end - time_start, " seconds"
     contains
     real(8) function f(x)
         real(8), intent(in) :: x
